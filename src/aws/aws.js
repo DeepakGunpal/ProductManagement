@@ -33,9 +33,6 @@ let uploadFile = (file) => {
       return resolve(data.Location); //link generated
     });
 
-    // let data= await s3.upload( uploadParams)
-    // if( data) return data.Location
-    // else return "there is an error"
   });
 };
 

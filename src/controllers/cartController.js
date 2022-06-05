@@ -65,23 +65,23 @@ const addToCart = async function (req, res) {
                     return res.status(400).send({ status: false, message: `Incorrect CartId use this ${findRealCart._id}` })
                 } else {
                     //increase quantity
-                    for (let i = 0; i < findCart.items.length; i++) {
+                    for (let i = 0; i < findRealCart.items.length; i++) {
 
-                        if (`${findCart.items[i].productId}` == `${findProduct._id}`) {
-                            findCart.items[i].quantity = findCart.items[i].quantity + quantity
-                            findCart.totalPrice = (findProduct.price * quantity) + findCart.totalPrice
-                            findCart.totalItems = findCart.items.length
-                            findCart.save()
-                            return res.status(200).send({ status: true, message: "product added to cart", data: findCart })
+                        if (`${findRealCart.items[i].productId}` == `${findProduct._id}`) {
+                            findRealCart.items[i].quantity = findRealCart.items[i].quantity + quantity
+                            findRealCart.totalPrice = (findProduct.price * quantity) + findRealCart.totalPrice
+                            findRealCart.totalItems = findRealCart.items.length
+                            findRealCart.save()
+                            return res.status(200).send({ status: true, message: "product added to cart", data: findRealCart })
                         }
                     }
 
                     //add new item in cart
-                    findCart.items[(findCart.items.length)] = { productId: productId, quantity: quantity }
-                    findCart.totalPrice = (findProduct.price * quantity) + findCart.totalPrice
-                    findCart.totalItems = findCart.items.length
-                    findCart.save()
-                    return res.status(200).send({ status: true, message: "product added to cart", data: findCart })
+                    findRealCart.items[(findRealCart.items.length)] = { productId: productId, quantity: quantity }
+                    findRealCart.totalPrice = (findProduct.price * quantity) + findRealCart.totalPrice
+                    findRealCart.totalItems = findRealCart.items.length
+                    findRealCart.save()
+                    return res.status(200).send({ status: true, message: "product added to cart", data: findRealCart })
                 }
             }
 

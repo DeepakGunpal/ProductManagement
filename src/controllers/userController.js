@@ -254,15 +254,6 @@ const login = async function (req, res) {
         .send({ status: false, message: "pls provide valid password" });
     }
 
-    // regex validation for passwrd
-
-    if (!passwordRegex.test(password)) {
-      return res.status(400).send({
-        status: false,
-        message: `Password length should be A Valid Password And Length Should Be in between 8 to 15 `,
-      });
-    }
-
     let user = await userModel.findOne({ email: email });
     if (!user) {
       return res
@@ -303,25 +294,8 @@ const getUser = async function (req, res) {
     const params = req.params;
     const userId = params.userId;
 
-    if (!userId) {
-      res
-        .status(400)
-        .send({ status: false, message: "please enter UserId in params" });
-    }
-
-    if (!isValidObjectId(userId)) {
-      return res
-        .status(400)
-        .send({ status: false, message: "userId is incorrect" });
-    }
-
     const user = await userModel.findOne({ _id: userId });
-    if (!user) {
-      return res.status(404).send({
-        status: false,
-        message: `User did not found with this ${userId} id`,
-      });
-    }
+
     res
       .status(200)
       .send({ status: true, message: "User profile details", data: user });
